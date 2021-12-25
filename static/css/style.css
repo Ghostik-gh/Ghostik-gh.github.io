@@ -1,0 +1,50 @@
+h1 {  
+    line-height: 1;
+}
+
+.mt-5{
+    margin-top: 30px;
+    margin-bottom: 5px;
+}
+
+#profile {
+    position: relative;
+    width: 50%;
+    min-height: 1px;
+    flex: 66.666667%;
+    max-width: 66.666667%;
+    padding: 15px;
+    margin-top: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: auto;
+}
+
+.details2{
+    display: flex;
+    justify-content: center;
+}
+
+.details{
+    display: flex;
+    justify-content: center;
+}
+
+.rounded-circle{
+    display: flex;
+    margin: auto;
+  }
+.fas {
+    font-weight: 900;
+    margin: auto;
+    margin-left: unset;
+}
+
+#verified{
+	position: relative;
+	display: inline-block;
+}
+
+body{
+    margin:auto
+}
