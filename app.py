@@ -98,6 +98,7 @@ def get_gifts_list(user_id):
         gifts = 0
     return gifts
 
+
 def get_list_friends(user_id):
     friends = session.method("friends.get", {"user_id": user_id})
     return friends['items']
