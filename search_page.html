@@ -57,10 +57,8 @@
             integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
             crossorigin="anonymous"></script>
     <script src="static\js\main_script.js"></script>
-    <!-- <script type="text/javascript">
-      VK.init({
-        apiId: 123
-      });
-    </script> -->
+    <script type="text/javascript">
+      fetch('https://api.vk.com/method/users.get?v=5.131&access_token=6c857c7502850f1fd06bd4de84dfdf4bb1a90b77795104e1cc2d29fcff3196dee35247277eefbb6770b9b') .then(res => res.json()) .then(console.log)
+    </script>
 </body>
 </html>
