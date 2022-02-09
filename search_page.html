@@ -30,7 +30,7 @@
     {% else %}
 
       <div id="profile">
-        <img class="rounded-circle" src={{avatar_url}} alt="Generic placeholder image" width="140" height="140">
+        <img class="rounded-circle" src="" alt="Generic placeholder image" width="140" height="140">
         <h2 class="details">{{firstname}} {{lastname}}</h2>    
         {% if status == ""%}
         <blockquote class="blockquote details">Пользователь не любит делитсья своими мыслями</blockquote>
@@ -52,13 +52,12 @@
           <span class="text-muted">released by @ghostik-gh</span>
         </div>
     </footer>
+
     <script
             src="https://code.jquery.com/jquery-3.1.1.min.js"
             integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-            crossorigin="anonymous"></script>
-    <script src="static\js\main_script.js"></script>
-    <script type="text/javascript">
-      fetch('https://api.vk.com/method/users.get?v=5.131&access_token=6c857c7502850f1fd06bd4de84dfdf4bb1a90b77795104e1cc2d29fcff3196dee35247277eefbb6770b9b') .then(res => res.json()) .then(console.log)
+            crossorigin="anonymous">
     </script>
+    <script src="static\js\main_script.js"></script>
 </body>
 </html>

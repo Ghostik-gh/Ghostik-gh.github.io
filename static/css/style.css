@@ -20,6 +20,12 @@ h1 {
     margin-bottom: auto;
 }
 
+.center_with_flex {
+    display: flex;
+    margin: auto;
+    flex-direction: column;
+}
+
 .details2{
     display: flex;
     justify-content: center;
