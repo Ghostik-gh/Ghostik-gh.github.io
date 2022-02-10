@@ -20,7 +20,7 @@ h1 {
     margin-bottom: auto;
 }
 
-.center_with_flex {
+.center-with-flex {
     display: flex;
     margin: auto;
     flex-direction: column;
