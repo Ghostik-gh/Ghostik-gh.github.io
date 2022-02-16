@@ -4,25 +4,53 @@ const token = 'f1633e94c4afd3f856f7766c45aa8557132b132ada93c4f189d33e77af3733053
 const client_id = 8074443;
 
 async function getResponse(){
-    let url = new URL('https://api.vk.com/method/users.get?v=5.131&access_token=f1633e94c4afd3f856f7766c45aa8557132b132ada93c4f189d33e77af3733053979925efe735d902029b');
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Accept', 'application/json');
+    // headers.append('Origin','file:///D:/Frontend/VK_profile/search_page.html');
 
-    let response = await fetch(url, {mode: "no-cors"});
-    // console.log(response);
+    let response = await fetch('https://api.vk.com/method/users.get?v=5.131&access_token=98ff2f9479e4d457c1b7cedf8f7f88ccfd321c299d60f4c5246cbdfb6fb3c7bb30aebe7e6c9bc3e5cf334', {
+        mode: 'cors',
+        credentials: 'include',
+        method: 'GET',
+        headers: headers
+    });
+
+    if (response.ok) {
+        let json = await response.text();
+        console.log(response)
+        console.log(json)
+      } else {
+        alert("Ошибка HTTP: " + response.status);
+      }
+}
+
+// https://api.vk.com/method/users.get?v=5.131&access_token=98ff2f9479e4d457c1b7cedf8f7f88ccfd321c299d60f4c5246cbdfb6fb3c7bb30aebe7e6c9bc3e5cf334
+
+// fetch('https://jsonplaceholder.typicode.com/users')
+//   .then(response => response.text())
+//   .then(json => console.log(json))
+
+
+
+  
+
+// , {mode: "no-cors"}
+
+function getResponseF(){
+    let url = new URL('https://jsonplaceholder.typicode.com/users');
+
+    let response = fetch(url);
     if (response.ok) { // if HTTP-status is 200-299
         // get the response body (the method explained below)
-        // let object = await response.json().then(console.log);
+        object = response.json();
         return response;
     } else {
         alert("HTTP-Error: " + response.status);
     }
+    console.log(object)
+    return 0;
 
-}
-
-
-function getResponseF(){
-    let url = new URL('https://api.vk.com/method/users.get?v=5.131&access_token=f1633e94c4afd3f856f7766c45aa8557132b132ada93c4f189d33e77af3733053979925efe735d902029b');
-
-    let response = fetch(url, {mode: "no-cors"});
     console.log(response);
     if (response.ok) { // if HTTP-status is 200-299
         // get the response body (the method explained below)
