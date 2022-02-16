@@ -7,7 +7,7 @@ async function getResponse(){
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     headers.append('Accept', 'application/json');
-    // headers.append('Origin','file:///D:/Frontend/VK_profile/search_page.html');
+    headers.append('Origin','https://ghostik-gh.github.io');
 
     let response = await fetch('https://api.vk.com/method/users.get?v=5.131&access_token=98ff2f9479e4d457c1b7cedf8f7f88ccfd321c299d60f4c5246cbdfb6fb3c7bb30aebe7e6c9bc3e5cf334', {
         mode: 'cors',
