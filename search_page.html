@@ -21,9 +21,10 @@
       <input type="submit" value="Найти">
       </div>
     </form>
-    {% if deleted %}
-      <p class="details2"> К сожалению эта страница удалена или не существует, поэтому просто посмотри на страницу Доры :) </p>
-    {% endif %}
+
+    <!-- {% if deleted %}
+      <p class="details2" id="DeletedProfile"> К сожалению эта страница удалена или не существует, поэтому просто посмотри на страницу Доры :) </p>
+    {% endif %} -->
 
     {% if not(finded) %}
       <p class="details2"> Введите ID пользователя </p>
@@ -79,15 +80,40 @@
         e.preventDefault();
         userIdName = formGetId.querySelector('[name="id"]');
         userId = userIdName.value;
+
         console.log(userId)
 
+        // info = session.method("users.get", {"user_ids": user_id, "fields": "photo_400_orig, verified, screen_name, is_closed, bdate"})
         var script = document.createElement('SCRIPT');
-        script.src = `https://api.vk.com/method/users.get?user_ids=${userId}&fields=bdate&access_token=${user_token}&v=5.131&callback=callbackFunc`;
+        script.src = `https://api.vk.com/method/users.get?user_ids=${userId}&fields=bdate,verified,is_closed,photo_400_orig&access_token=${user_token}&v=5.131&callback=getInfoAboutUser`;
         document.getElementsByTagName("head")[0].appendChild(script);
+
       } // Получили User ID но только внутри функции
-      function callbackFunc(result) {
-          console.log(result.response[0])
+      
+      
+      function getInfoAboutUser(result) {
+        let dletedFlag = false;
+        let closedFlag = false;
+        console.log(result.response[0])
+        const divDeleted = document.createElement('p');
+        divDeleted.className = "details2";
+        divDeleted.innerHTML = `К сожалению эта страница удалена или не существует, поэтому просто посмотри на страницу Доры :)`;
+
+        if (result.response[0].deactivated == 'deleted'){ // Аккаунт удален
+          dletedFlag = true;
+          userId = 224816985; // Тогда выдаем акк Доры 
+
+          formUserId.after(divDeleted);
+
+          //document.getElementById('DeletedProfile')
+        }
+        else {
+          divDeleted.remove();
+          if (result.response[0].is_closed == true){closedFlag = true;} // Закрытый аккаунт
+        }
+
       }
+      console.log(userId, "Deleted: ", deleteFlag);
 
 
    </script>
