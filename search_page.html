@@ -52,12 +52,44 @@
           <span class="text-muted">released by @ghostik-gh</span>
         </div>
     </footer>
-
     <script
-            src="https://code.jquery.com/jquery-3.1.1.min.js"
-            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-            crossorigin="anonymous">
+    src="https://code.jquery.com/jquery-3.1.1.min.js"
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous">
     </script>
     <script src="static\js\main_script.js"></script>
+    <script type="text/javascript"> //
+
+      let user_token = ''
+      const hash = window.location.hash;
+      let flag = false
+      for (let char of hash){
+          if (char == '&') break;
+          if (flag) user_token += char;
+          if (char == '=') flag = true; 
+      }
+      if (user_token == '') user_token = 'cdf6d25892dbdfcef87bafd8530b57ea7d3caf024fd3486aa056a8dfcaa8352acce85504489999c066055';
+
+      console.log("Token =", user_token); 
+
+      const formGetId = document.getElementById('formUserId');
+      formGetId.addEventListener('submit', getFormValue);
+
+      function getFormValue(e){
+        e.preventDefault();
+        userIdName = formGetId.querySelector('[name="id"]');
+        userId = userIdName.value;
+        console.log(userId)
+
+        var script = document.createElement('SCRIPT');
+        script.src = `https://api.vk.com/method/users.get?user_ids=${userId}&fields=bdate&access_token=${user_token}&v=5.131&callback=callbackFunc`;
+        document.getElementsByTagName("head")[0].appendChild(script);
+      } // Получили User ID но только внутри функции
+      function callbackFunc(result) {
+          console.log(result.response[0])
+      }
+
+
+   </script>
 </body>
 </html>
