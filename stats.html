@@ -12,33 +12,9 @@
     <title>Vk Stats</title>
 </head>
 <body>
-
     <main role="main" class="container">
-    <div>
-        {% if verified == 1 %}
-        <p class="details2">More stats about user: {{firstname}} {{lastname}}<i class="fas fa-user-check" title="Пользователь подтвержден"></i></span></p>
-        {% else %}
-        <p class="details2">More stats about user: {{firstname}} {{lastname}} </p>
-        {% endif %}
-        <div class="row mb-3">
-            <div class="col-xl-12 themed-grid-col">Nickname: {{screen_name}}</div>  
-        </div>
-        <div class="row mb-3">
-            <div class="col-xl-12 themed-grid-col">Birthday: {{bdate}}</div>
-        </div>
-        <div class="row mb-3">
-            <div class="col-xl-12 themed-grid-col">Friends: {{count_friends}}</div>
-        </div>
-        {% if gifts != 0 %}
-        <div class="row mb-3">
-            <div class="col-xl-12 themed-grid-col">Подарков: {{gifts}}</div>
-        </div>
-        {% endif %}
-        <div class="row mb-3">
-            <p class="details"><a class="btn btn-secondary" href="search_page.html" role="button">Выбрать другого пользователя</a></p>
-        </div>
-        
-    </div>    
+        <div class="mt-5">
+        </div>    
     </main>
 
     <script src="static\js\addStatsPage.js"></script>
