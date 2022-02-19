@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="static\icon.ico" type="image/x-icon">
+    <link href="static\css\style.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/26e3ee569a.js"></script>
+    <script src="https://vk.com/js/api/openapi.js?169" type="text/javascript"></script>
+    <title>Vk Stats</title>
+</head>
+<body>
+
+    <main role="main" class="container">
+    <div>
+        {% if verified == 1 %}
+        <p class="details2">More stats about user: {{firstname}} {{lastname}}<i class="fas fa-user-check" title="Пользователь подтвержден"></i></span></p>
+        {% else %}
+        <p class="details2">More stats about user: {{firstname}} {{lastname}} </p>
+        {% endif %}
+        <div class="row mb-3">
+            <div class="col-xl-12 themed-grid-col">Nickname: {{screen_name}}</div>  
+        </div>
+        <div class="row mb-3">
+            <div class="col-xl-12 themed-grid-col">Birthday: {{bdate}}</div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-xl-12 themed-grid-col">Friends: {{count_friends}}</div>
+        </div>
+        {% if gifts != 0 %}
+        <div class="row mb-3">
+            <div class="col-xl-12 themed-grid-col">Подарков: {{gifts}}</div>
+        </div>
+        {% endif %}
+        <div class="row mb-3">
+            <p class="details"><a class="btn btn-secondary" href="/" role="button">Выбрать другого пользователя</a></p>
+        </div>
+        
+    </div>    
+    </main>
+
+    <script src="static\js\main_script.js"></script>
+    <script src="static\js\add_footer.js"></script>
+</body>
+</html>
