@@ -8,8 +8,9 @@ for (let char of hash){
     if (char == '=') flag = true; 
 }
 if (user_token == '' || user_token == undefined) user_token = 'ab97e3c02ebcee018a349baeffc17bb3ae4f098b9018fef8fbe31e047b830a6d979467ad8558ea5dd652d'; //Временный токен для работы без авторизации
-
-console.log("Token =", user_token); 
+window.Storage = {};
+window.Storage.userToken = user_token;
+console.log(window.Storage.userToken);
 
 const formGetId = document.getElementById('formUserId');
 formGetId.addEventListener('submit', getFormValue);
@@ -33,6 +34,7 @@ function getFormValue(e){
 
 
 function getInfoAboutUser(result) {
+    userId = result.response[0].id;
     try{ const searchId = document.getElementById('searchId'); searchId.remove(); } catch {}
     try{ // Удаление прошлого профиля 
     var container = document.getElementById('profile'); while (container.firstChild) {container.removeChild(container.firstChild);}
@@ -68,12 +70,12 @@ function getInfoAboutUser(result) {
     const fullName = `<h2 class="details" id="fullName">${result.response[0].first_name} ${result.response[0].last_name}</h2>`;
     profile.insertAdjacentHTML("beforeend", fullName); // Имя человека
     
-    if(result.response[0].status != ''){ status = `<blockquote class="blockquote details">${result.response[0].status}</blockquote>`}
-    else { status = `<blockquote class="blockquote details">Пользователь не имеет статуса </blockquote>`}
-    profile.insertAdjacentHTML("beforeend", status); // Статус пользователя
+    if(result.response[0].status != ''){ user_status = `<blockquote class="blockquote details">${result.response[0].status}</blockquote>`}
+    else { user_status = `<blockquote class="blockquote details">Пользователь не имеет статуса </blockquote>`}
+    profile.insertAdjacentHTML("beforeend", user_status); // Статус пользователя
 
-    if (result.response[0].is_closed) { profileButton = `<a class="btn btn-secondary details" id="profileButton" href="/" role="button">Это закрытый аккаунт</a>`;}
-    else { profileButton = `<a class="btn btn-secondary details" id="profileButton" href="stats.html" role="button">View details »</a>`;}
+    if (result.response[0].is_closed) { profileButton = `<a class="btn btn-secondary details" id="profileButton" href="search_page.html" role="button">Это закрытый аккаунт</a>`;}
+    else { profileButton = `<a class="btn btn-secondary details" id="profileButton" href="stats.html?access_token=${user_token}&userId=${userId}" role="button">View details »</a>`;}
     profile.insertAdjacentHTML("beforeend", profileButton); // Кнопки внизу страницы
 }
 
