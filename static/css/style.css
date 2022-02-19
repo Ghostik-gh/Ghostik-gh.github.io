@@ -45,7 +45,9 @@ h1 {
     margin: auto;
     margin-left: unset;
 }
-
+#profileButton{
+    display: flex;
+}
 #verified{
 	position: relative;
 	display: inline-block;
