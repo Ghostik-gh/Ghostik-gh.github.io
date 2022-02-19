@@ -31,7 +31,7 @@
     {% else %}
 
       <div id="profile">
-        <img class="rounded-circle" src="" alt="Generic placeholder image" width="140" height="140">
+        <!-- <img class="rounded-circle" src="" alt="Generic placeholder image" width="140" height="140"> -->
         <h2 class="details">{{firstname}} {{lastname}}</h2>    
         {% if status == ""%}
         <blockquote class="blockquote details">Пользователь не любит делитсья своими мыслями</blockquote>
@@ -92,24 +92,37 @@
       
       
       function getInfoAboutUser(result) {
-        let dletedFlag = false;
+        try{
+          const imgProfile = document.getElementById('imgProfile');
+          imgProfile.remove(); } catch (err) {}
+        
         let closedFlag = false;
-        console.log(result.response[0])
+        console.log(result.response[0]);
+
+
+        // прописать условие чтобы не дублировалось если уже есть
+        
         const divDeleted = document.createElement('p');
         divDeleted.className = "details2";
+        divDeleted.id = 'divDeleted';
         divDeleted.innerHTML = `К сожалению эта страница удалена или не существует, поэтому просто посмотри на страницу Доры :)`;
 
         if (result.response[0].deactivated == 'deleted'){ // Аккаунт удален
           dletedFlag = true;
           userId = 224816985; // Тогда выдаем акк Доры 
-
           formUserId.after(divDeleted);
-
-          //document.getElementById('DeletedProfile')
         }
         else {
-          divDeleted.remove();
+          console.log("Removing");
+          try{
+          const divDeleted = document.getElementById('divDeleted')
+          divDeleted.remove(); } catch (err) {}
+          
           if (result.response[0].is_closed == true){closedFlag = true;} // Закрытый аккаунт
+
+          const profile = document.getElementById('profile')
+          const imgProfile = `<img class="rounded-circle" id="imgProfile" src="${result.response[0].photo_400_orig}" alt="Generic placeholder image" width="140" height="140">`;
+          profile.insertAdjacentHTML("afterbegin", imgProfile);
         }
 
       }
