@@ -22,28 +22,9 @@
       </div>
     </form>
 
-    <!-- {% if deleted %}
-      <p class="details2" id="DeletedProfile"> К сожалению эта страница удалена или не существует, поэтому просто посмотри на страницу Доры :) </p>
-    {% endif %} -->
-
-      <p class="details2" id="searchId"> Введите ID пользователя </p>
-
-      <div id="profile">
-        <!-- <img class="rounded-circle" src="" alt="Generic placeholder image" width="140" height="140"> -->
-        <!-- <h2 class="details">{{firstname}} {{lastname}}</h2>     -->
-        <!-- {% if status == ""%}
-        <blockquote class="blockquote details">Пользователь не любит делитсья своими мыслями</blockquote>
-        {% else %}
-        <blockquote class="blockquote details">{{status}}</blockquote>
-        {% endif %} -->
-        <!-- <div class="details">
-          {% if private %}
-            <a class="btn btn-secondary" href="/" role="button">Это закрытый аккаунт</a>
-          {% else %}
-            <a class="btn btn-secondary" href="*/stats" role="button">View details »</a>
-          {% endif %}
-        </div> -->
-      </div>
+    <p class="details2" id="searchId">Введите ID пользователя</p>
+    <div id="profile"></div>
+  
   </main>
 
   <script
@@ -55,94 +36,5 @@
   <script src="static\js\main_script.js"></script>
   <script src="static\js\add_footer.js"></script>
 
-  <script type="text/javascript"> //
-
-    let user_token = ''
-    const hash = window.location.hash;
-    let flag = false
-    for (let char of hash){
-        if (char == '&') break;
-        if (flag) user_token += char;
-        if (char == '=') flag = true; 
-    }
-    if (user_token == '') user_token = 'ab97e3c02ebcee018a349baeffc17bb3ae4f098b9018fef8fbe31e047b830a6d979467ad8558ea5dd652d';
-
-    console.log("Token =", user_token); 
-
-    const formGetId = document.getElementById('formUserId');
-    formGetId.addEventListener('submit', getFormValue);
-
-    function getFormValue(e){
-      e.preventDefault();
-      userIdName = formGetId.querySelector('[name="id"]');
-      userId = userIdName.value;
-      
-      try { 
-        const divDeleted = document.getElementById('divDeleted')
-        divDeleted.remove(); } catch (err) {}
-
-      // info = session.method("users.get", {"user_ids": user_id, "fields": "photo_400_orig, verified, screen_name, is_closed, bdate"})
-      var script = document.createElement('SCRIPT');
-      script.src = `https://api.vk.com/method/users.get?user_ids=${userId}&fields=bdate,verified,is_closed,photo_400_orig,status&access_token=${user_token}&v=5.131&callback=getInfoAboutUser`;
-      script.id = "deleteAfterUsing";
-      document.getElementsByTagName("head")[0].appendChild(script);
-      script.remove();
-
-    } // Получили User ID но только внутри функции
-    
-    
-    function getInfoAboutUser(result) {
-      try{ const searchId = document.getElementById('searchId'); searchId.remove(); } catch {}
-      try{ // Удаление профиля прошлого запроса 
-        var container = document.getElementById('profile'); while (container.firstChild) {container.removeChild(container.firstChild);}
-      } catch (err) {}
-
-      console.log(result.response[0]);
-
-      const divDeleted = document.createElement('p');
-      divDeleted.className = "details2";
-      divDeleted.id = 'divDeleted';
-      divDeleted.innerHTML = `К сожалению эта страница удалена или не существует, поэтому просто посмотри на страницу Доры :)`;
-      
-      try{
-        if (result.response[0].deactivated == 'deleted'){ // если аккаунт удален
-          let userId = 224816985; // Тогда выдаем акк Доры 
-
-          formUserId.after(divDeleted); 
-          var script = document.createElement('SCRIPT');
-          script.src = `https://api.vk.com/method/users.get?user_ids=${userId}&fields=bdate,verified,is_closed,photo_400_orig,status&access_token=${user_token}&v=5.131&callback=getInfoAboutUser`;
-          script.id = "deleteAfterUsing";
-          document.getElementsByTagName("head")[0].appendChild(script);
-          script.remove();
-          
-        }
-      } catch { console.log("Error with deleted account")}
-
-      // Добавление профиля пользователя
-      const profile = document.getElementById('profile')
-
-      const imgProfile = `<img class="rounded-circle" id="imgProfile" src="${result.response[0].photo_400_orig}" alt="Generic placeholder image" width="140" height="140">`;
-      profile.insertAdjacentHTML("beforeend", imgProfile); // Аватар профиля
-
-      const fullName = `<h2 class="details" id="fullName">${result.response[0].first_name} ${result.response[0].last_name}</h2>`;
-      profile.insertAdjacentHTML("beforeend", fullName); // Имя человека
-      
-      console.log(result.response[0].status);
-      if(result.response[0].status != ''){
-         status = `<blockquote class="blockquote details">${result.response[0].status}</blockquote>`}
-      else { status = `<blockquote class="blockquote details">Пользователь не имеет статуса </blockquote>`}
-
-      profile.insertAdjacentHTML("beforeend", status); // Статус пользователя
-
-      if (result.response[0].is_closed) { profileButton = `<a class="btn btn-secondary details" id="profileButton" href="/" role="button">Это закрытый аккаунт</a>`;}
-      else { profileButton = `<a class="btn btn-secondary details" id="profileButton" href="stats.html" role="button">View details »</a>`;}
-      profile.insertAdjacentHTML("beforeend", profileButton); // Кнопки внизу страницы
-
-
-    }
-    // console.log(userId, "Deleted: ", deleteFlag);
-
-
-  </script>
 </body>
 </html>
