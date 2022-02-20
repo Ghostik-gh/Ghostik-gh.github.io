@@ -1,3 +1,7 @@
+/* 
+Fotter можно добавлять только в файл с блоком main
+иначе отображаться будет некоректно
+*/
 let footer = document.createElement('footer');
 footer.className = "card-footer";
 footer.innerHTML = `<div class="container">
