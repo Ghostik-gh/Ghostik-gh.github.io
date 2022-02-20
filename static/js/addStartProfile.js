@@ -7,7 +7,7 @@ for (let char of hash){
     if (flag) user_token += char;
     if (char == '=') flag = true; 
 }
-if (user_token == '' || user_token == undefined) user_token = 'ab97e3c02ebcee018a349baeffc17bb3ae4f098b9018fef8fbe31e047b830a6d979467ad8558ea5dd652d'; //Временный токен для работы без авторизации
+if (user_token == '' || user_token == undefined || user_token == 'access_denied') user_token = 'd401f56f90ec698cb203e120e70326cc28d385aa842b9d150b44fa3107bc3c6bf17a8e2f0705bdee7302b'; //Временный токен для работы без авторизации
 window.Storage = {};
 window.Storage.userToken = user_token;
 console.log(window.Storage.userToken);
