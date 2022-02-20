@@ -1,9 +1,7 @@
 # VK Stats with VK API
-Python v3.9
-Flask
+JS
+CSS with bootstrap
 
 На главной странице выводит аватар пользователя с его цитатой и предлагает перейти на более подробную статистику, при условии существования пользователя, если аккаунт закрыт то вместо кнопки со статистикой будет предложенно ввести другой id
 
-На второй странице есть обработка полей со статистикой в зависимоти от наличия ее на странице пользователя
-
-Поля получаемые из API VK: bdate, count friends, count gifts, verified, status, photo, nickname, is_closed
+Поля получаемые из API VK: bdate, count friends, verified, status, photo, nickname, is_closed
